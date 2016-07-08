@@ -6,6 +6,7 @@ import graphql from 'express-graphql';
 import { MongoClient } from 'mongodb';
 import Html from './components/Html';
 import schema from './data/schema';
+import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,6 +19,8 @@ if (process.env.NODE_ENV !== 'production') {
   const webpackConfig = require('./tools/webpack.config').default;
   app.use(webpackMiddleware(webpack(webpackConfig), { stats: webpackConfig.stats}));
 }
+
+app.use(cors())
 
 // Register GraphQL middleware
 // https://github.com/graphql/express-graphql
